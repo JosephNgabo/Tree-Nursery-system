@@ -12,7 +12,7 @@ const options = {
     },
     servers: [
       {
-        url: 'https://tree-management-api.onrender.com',
+        url: 'https://tree-management-api.onrender.com/api',
       },
     ],
   },
