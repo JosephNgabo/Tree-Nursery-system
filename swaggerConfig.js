@@ -12,7 +12,9 @@ const options = {
     },
     servers: [
       {
-        url: 'https://tree-management-api.onrender.com/api',
+        url: isProduction
+          ? 'https://tree-management-api.onrender.com/api'
+          : 'http://localhost:3000/api',
       },
     ],
   },
