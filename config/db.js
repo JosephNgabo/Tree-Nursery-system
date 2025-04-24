@@ -11,12 +11,13 @@ const pool = new Pool({
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   port: process.env.DB_PORT,
-  ssl: process.env.DB_SSL === 'true'  // Convert to boolean if needed
-});
+  connectionString: process.env.DATABASE_URL,
+  ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false // Enable SSL if DB_SSL is set to 'true'
 
-// Add connection testing
+});
+// Optionally, log any errors or successful connection events
 pool.on('connect', () => {
-  console.log('Database connected successfully');
+  console.log("Database connected successfully");
 });
 
 pool.on('error', (err) => {
