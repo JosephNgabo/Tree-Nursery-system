@@ -36,10 +36,10 @@ const userController = {
 
       res.status(201).json(result.rows[0]);
     } catch (error) {
-      console.error("Registration Error: ", error); // Log the error to the console for debugging
+      console.error("Error in user registration:", error); // Log full error details for debugging
       res.status(500).json({
         error: 'Failed to register user',
-        details: error.message || 'An unexpected error occurred'
+        details: error.stack || error.message || 'An unexpected error occurred' // Send stack trace if available
       });
     }
   },
