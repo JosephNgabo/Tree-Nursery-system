@@ -12,7 +12,7 @@ const options = {
     },
     servers: [
       {
-        url: 'http://localhost:3000/api/users/', // or your server IP
+        url: 'https://tree-management-api.onrender.com',
       },
     ],
   },

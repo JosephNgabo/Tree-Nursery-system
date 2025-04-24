@@ -11,7 +11,7 @@ const { swaggerUi, swaggerSpec } = require('./swaggerConfig');
 const app = express();
 
 // Swagger docz
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('api/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 
 // Middleware
