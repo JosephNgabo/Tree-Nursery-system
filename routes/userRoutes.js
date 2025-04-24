@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
+
 /**
  * @swagger
- * /api/register:
+ * /register:
  *   post:
  *     summary: Register a new user
  *     tags: [Users]
@@ -42,11 +43,9 @@ const userController = require('../controllers/userController');
  *         description: Bad request
  */
 
-
-
 /**
  * @swagger
- * /api/login:
+ * /login:
  *   post:
  *     summary: Login a user
  *     tags: [Users]
@@ -87,8 +86,8 @@ const userController = require('../controllers/userController');
  *         description: Server error.
  */
 
-// Make sure the controller methods are properly referenced
+// Define the routes
 router.post('/register', userController.register);
 router.post('/login', userController.login);
 
-module.exports = router; 
+module.exports = router;
