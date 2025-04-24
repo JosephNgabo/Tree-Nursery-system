@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET = 'your-secret-key'; // Use the same secret as in userController
+// Use the environment variable if available
+const JWT_SECRET = process.env.JWT_SECRET || 'your-default-secret-key';
 
 const auth = (req, res, next) => {
   try {
@@ -13,4 +14,4 @@ const auth = (req, res, next) => {
   }
 };
 
-module.exports = auth; 
+module.exports = auth;
