@@ -17,7 +17,7 @@ const pool = new Pool({
 });
 // Optionally, log any errors or successful connection events
 pool.on('connect', () => {
-  console.log("Database connected successfully");
+  console.log("Database connected successfull");
 });
 
 pool.on('error', (err) => {
