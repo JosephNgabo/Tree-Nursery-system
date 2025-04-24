@@ -18,6 +18,20 @@ const options = {
           : 'http://localhost:3000/api',
       },
     ],
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT'
+        }
+      }
+    },
+    security: [
+      {
+        bearerAuth: []
+      }
+    ],
   },
   apis: ['./routes/*.js'], // Adjust path to your route files
 };

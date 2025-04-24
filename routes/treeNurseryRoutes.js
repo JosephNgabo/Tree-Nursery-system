@@ -11,11 +11,12 @@ router.post('/register', auth, treeNurseryController.register);
  * /tree-nursery:
  *   get:
  *     summary: Get all tree nurseries
- *     tags:
- *       - Tree Nursery
+ *     tags: [TreeNursery]
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: A list of tree nurseries
+ *         description: List of tree nurseries
  *         content:
  *           application/json:
  *             schema:
