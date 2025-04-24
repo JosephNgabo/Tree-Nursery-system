@@ -18,7 +18,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // API routes
 app.use('/api/trees', treeRoutes);
-app.use('/api/users', userRoutes);
+app.use('/api', userRoutes);
 app.use('/api/tree-nursery', treeNurseryRoutes);
 app.use('/api/tree-field', treeFieldRoutes);
 

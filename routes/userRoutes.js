@@ -3,7 +3,7 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 /**
  * @swagger
- * /register:
+ * /api/register:
  *   post:
  *     summary: Register a new user
  *     tags: [Users]
@@ -46,7 +46,7 @@ const userController = require('../controllers/userController');
 
 /**
  * @swagger
- * /login:
+ * /api/login:
  *   post:
  *     summary: Login a user
  *     tags: [Users]
