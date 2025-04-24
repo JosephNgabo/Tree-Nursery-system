@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: tree-management-api
+    env: node
+    plan: free
+    branch: main # or "dev" if you're deploying from dev
+    buildCommand: npm install
+    startCommand: node app.js
+    envVars:
+      - key: PORT
+        value: 3000
