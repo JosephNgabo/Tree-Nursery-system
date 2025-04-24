@@ -1,6 +1,7 @@
 // swagger.js
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
+const isProduction = process.env.NODE_ENV === 'production';
 
 const options = {
   definition: {
