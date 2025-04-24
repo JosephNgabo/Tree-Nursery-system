@@ -2,6 +2,9 @@ require('dotenv').config();  // Load environment variables from the .env file
 
 const { Pool } = require('pg');
 
+// Log the database connection attempt
+console.log("Connecting to the database...");
+
 const pool = new Pool({
   host: process.env.DB_HOST,
   database: process.env.DB_DATABASE,
