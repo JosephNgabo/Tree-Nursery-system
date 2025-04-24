@@ -23,6 +23,75 @@ router.post('/register', auth, treeNurseryController.register);
 // Get all trees nursery
 router.get('/', auth, treeNurseryController.view);
 
+/**
+ * @swagger
+ * /tree-nursery/{tree_desc_id}:
+ *   get:
+ *     summary: Get a single tree nursery by ID
+ *     tags: [TreeNursery]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: tree_desc_id
+ *         required: true
+ *         description: ID of the tree nursery to retrieve
+ *         schema:
+ *           type: integer
+ *           example: 2
+ *     responses:
+ *       200:
+ *         description: The tree nursery details
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 tree_desc_id:
+ *                   type: integer
+ *                   example: 2
+ *                 growing_method_id:
+ *                   type: integer
+ *                   example: 1
+ *                 stage_id_nursery:
+ *                   type: integer
+ *                   example: 1
+ *                 date_planted:
+ *                   type: string
+ *                   format: date
+ *                   example: "2024-04-16"
+ *                 quantity:
+ *                   type: string
+ *                   example: "350.00"
+ *                 registration_date:
+ *                   type: string
+ *                   format: date
+ *                   example: "2025-04-16"
+ *                 propagation_method:
+ *                   type: string
+ *                   example: "Testing updating"
+ *                 village_id:
+ *                   type: string
+ *                   example: "1"
+ *                 registered_by:
+ *                   type: integer
+ *                   example: 5
+ *                 created_at:
+ *                   type: string
+ *                   format: date-time
+ *                   example: "2025-04-16T17:25:37.085Z"
+ *                 notes:
+ *                   type: string
+ *                   example: "Now updated"
+ *                 updated_at:
+ *                   type: string
+ *                   format: date-time
+ *                   example: "2025-04-16T17:39:06.524Z"
+ *       404:
+ *         description: Tree nursery not found
+ *       500:
+ *         description: Server error
+ */
 // Get single tree nursery
 router.get('/:tree_desc_id', auth, treeNurseryController.viewSingle);
 
