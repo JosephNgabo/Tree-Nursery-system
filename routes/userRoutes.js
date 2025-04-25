@@ -19,7 +19,6 @@ const userController = require('../controllers/userController');
  *               - email
  *               - password
  *               - role
- *               - tree_desc_id
  *             properties:
  *               name:
  *                 type: string
@@ -33,9 +32,6 @@ const userController = require('../controllers/userController');
  *               role:
  *                 type: string
  *                 example: admin
- *               tree_desc_id:
- *                 type: integer
- *                 example: 1
  *     responses:
  *       200:
  *         description: User registered successfully

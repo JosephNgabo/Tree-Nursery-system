@@ -209,7 +209,7 @@ router.put('/:tree_desc_id', auth, treeNurseryController.update);
 
 /**
  * @swagger
- * /api/tree-nursery/{tree_desc_id}:
+ * /tree-nursery/{tree_desc_id}:
  *   delete:
  *     summary: Delete a tree nursery record
  *     tags: [Tree Nursery]
