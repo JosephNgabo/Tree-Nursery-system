@@ -78,7 +78,7 @@ router.post('/register', auth, treeFieldController.register);
 
 /**
  * @swagger
- * /tree-field/{tree_desc_id}:
+ * /trees-field/{tree_desc_id}:
  *   put:
  *     summary: Update a tree field by tree_desc_id
  *     tags: [TreeField]
@@ -223,7 +223,7 @@ router.get('/:tree_desc_id', auth, treeFieldController.viewSingle);
 
 /**
  * @swagger
- * /tree-field:
+ * /trees-field:
  *   get:
  *     summary: Get all tree field records with optional filters
  *     tags: [TreeField]
@@ -300,7 +300,7 @@ router.get('/', auth, treeFieldController.viewAll);
 
 /**
  * @swagger
- * /tree-field/{tree_desc_id}:
+ * /trees-field/{tree_desc_id}:
  *   delete:
  *     summary: Delete a tree field record by tree_desc_id
  *     tags: [TreeField]
