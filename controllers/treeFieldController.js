@@ -61,7 +61,86 @@ register: async (req, res) => {
         code: error.code
       });
     }
+  },
+  // Update tree field record
+update: async (req, res) => {
+  try {
+    const { id } = req.params; // Get tree field ID from URL parameter
+    const {
+      tree_desc_id,
+      growing_method_id,
+      stage_id_field,
+      date_planted,
+      quantity,
+      propagation_method,
+      village_id,
+      registered_by,
+      notes
+    } = req.body;
+
+    // Validate required fields
+    if (!tree_desc_id || !growing_method_id || !stage_id_field || !date_planted ||
+        !quantity || !propagation_method || !village_id || !registered_by) {
+      return res.status(400).json({
+        error: 'Missing required fields',
+        details: 'Ensure all required fields are provided'
+      });
+    }
+
+    console.log('Updating record:', id, req.body); // Debug log
+
+    // Update tree field query
+    const query = `
+      UPDATE trees_field 
+      SET 
+        tree_desc_id = $1,
+        growing_method_id = $2,
+        stage_id_field = $3,
+        date_planted = $4,
+        quantity = $5,
+        propagation_method = $6,
+        village_id = $7,
+        registered_by = $8,
+        notes = $9,
+        updated_at = CURRENT_TIMESTAMP
+      WHERE id = $10
+      RETURNING *
+    `;
+
+    const values = [
+      tree_desc_id,
+      growing_method_id,
+      stage_id_field,
+      date_planted,
+      quantity,
+      propagation_method,
+      village_id,
+      registered_by,
+      notes || null,  // Set notes to null if not provided
+      id
+    ];
+
+    const result = await db.query(query, values);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({
+        error: 'Tree field record not found',
+        details: `No tree field found with ID ${id}`
+      });
+    }
+
+    res.json({
+      message: 'Tree field updated successfully',
+      data: result.rows[0]
+    });
+  } catch (error) {
+    console.error('Update error:', error);
+    res.status(500).json({
+      error: 'Failed to update tree field record',
+      details: error.message
+    });
   }
+}
 };
 
 module.exports = treeFieldController;

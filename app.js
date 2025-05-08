@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const { swaggerUi, swaggerSpec } = require('./swaggerConfig');
 
-const treeRoutes = require('./routes/treeRoutes');
+// const treeRoutes = require('./routes/treeRoutes');
 const userRoutes = require('./routes/userRoutes');
 const treeNurseryRoutes = require('./routes/treeNurseryRoutes');
 const treeFieldRoutes = require('./routes/treeFieldRoutes');
@@ -17,7 +17,7 @@ app.use(express.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // API routes
-app.use('/api/trees', treeRoutes);
+// app.use('/api/trees', treeRoutes);
 app.use('/api', userRoutes);
 app.use('/api/tree-nursery', treeNurseryRoutes);
 app.use('/api/trees-field', treeFieldRoutes);
