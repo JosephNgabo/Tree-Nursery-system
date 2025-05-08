@@ -3,6 +3,79 @@ const router = express.Router();
 const treeNurseryController = require('../controllers/treeNurseryController');
 const auth = require('../middleware/auth'); // We'll create this next
 
+/**
+ * @swagger
+ * /tree-nursery:
+ *   post:
+ *     summary: Register a new tree nursery
+ *     tags: [TreeNursery]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - tree_desc_id
+ *               - growing_method_id
+ *               - stage_id_nursery
+ *               - date_planted
+ *               - quantity
+ *               - propagation_method
+ *               - village_id
+ *               - registered_by
+ *             properties:
+ *               tree_desc_id:
+ *                 type: integer
+ *                 example: 1
+ *               growing_method_id:
+ *                 type: integer
+ *                 example: 2
+ *               stage_id_nursery:
+ *                 type: integer
+ *                 example: 3
+ *               date_planted:
+ *                 type: string
+ *                 format: date
+ *                 example: 2024-01-01
+ *               quantity:
+ *                 type: integer
+ *                 example: 100
+ *               propagation_method:
+ *                 type: string
+ *                 example: "grafting"
+ *               village_id:
+ *                 type: integer
+ *                 example: 10
+ *               registered_by:
+ *                 type: integer
+ *                 example: 5
+ *               notes:
+ *                 type: string
+ *                 example: "Healthy saplings for this season"
+ *     responses:
+ *       201:
+ *         description: Tree nursery registered successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Tree nursery registered successfully
+ *                 data:
+ *                   type: object
+ *       400:
+ *         description: Missing required fields
+ *       404:
+ *         description: Tree description ID not found (if you validate it beforehand)
+ *       500:
+ *         description: Server error
+ */
+
 // Protected route - requires authentication
 router.post('/register', auth, treeNurseryController.register);
 

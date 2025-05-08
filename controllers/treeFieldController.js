@@ -19,7 +19,7 @@ register: async (req, res) => {
   
       // Add registration_date and created_at automatically
       const query = `
-        INSERT INTO tree_nursery_field (
+        INSERT INTO trees_field (
           tree_desc_id,
           growing_method_id,
           stage_id_field,

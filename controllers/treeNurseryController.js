@@ -1,10 +1,72 @@
 const db = require('../config/db');
 
 const treeNurseryController = {
+  // register: async (req, res) => {
+  //   try {
+  //     const {
+  //       tree_desc_id,
+  //       growing_method_id,
+  //       stage_id_nursery,
+  //       date_planted,
+  //       quantity,
+  //       propagation_method,
+  //       village_id,
+  //       registered_by,
+  //       notes
+  //     } = req.body;
+
+  //     console.log('Received data:', req.body); // Debug log
+
+  //     // Add registration_date and created_at automatically
+  //     const query = `
+  //       INSERT INTO trees_nursery (
+  //         tree_desc_id,
+  //         growing_method_id,
+  //         stage_id_nursery,
+  //         date_planted,
+  //         quantity,
+  //         registration_date,
+  //         propagation_method,
+  //         village_id,
+  //         registered_by,
+  //         created_at,
+  //         notes
+  //       ) VALUES ($1, $2, $3, $4, $5, CURRENT_DATE, $6, $7, $8, CURRENT_TIMESTAMP, $9)
+  //       RETURNING *
+  //     `;
+
+  //     const values = [
+  //       tree_desc_id,
+  //       growing_method_id,
+  //       stage_id_nursery,
+  //       date_planted,
+  //       quantity,
+  //       propagation_method,
+  //       village_id,
+  //       registered_by,
+  //       notes
+  //     ];
+
+  //     console.log('Query values:', values); // Debug log
+
+  //     const result = await db.query(query, values);
+  //     console.log('Query result:', result.rows[0]); // Debug log
+      
+  //     res.status(201).json(result.rows[0]);
+  //   } catch (error) {
+  //     console.error('Detailed error:', error); // More detailed error logging
+  //     res.status(500).json({ 
+  //       error: 'Failed to register tree nursery',
+  //       details: error.message,
+  //       code: error.code
+  //     });
+  //   }
+  // },
+
   register: async (req, res) => {
     try {
       const {
-        tree_desc_id,
+        tree_desc_id,         // ✅ Directly from client
         growing_method_id,
         stage_id_nursery,
         date_planted,
@@ -14,11 +76,20 @@ const treeNurseryController = {
         registered_by,
         notes
       } = req.body;
-
-      console.log('Received data:', req.body); // Debug log
-
-      // Add registration_date and created_at automatically
-      const query = `
+  
+      // ✅ Step 1: Validate required fields
+      if (
+        !tree_desc_id || !growing_method_id || !stage_id_nursery || !date_planted ||
+        !quantity || !propagation_method || !village_id || !registered_by
+      ) {
+        return res.status(400).json({
+          error: 'Missing required fields',
+          details: 'Ensure all required fields including tree_desc_id are provided'
+        });
+      }
+  
+      // ✅ Step 2: Insert into trees_nursery
+      const insertQuery = `
         INSERT INTO trees_nursery (
           tree_desc_id,
           growing_method_id,
@@ -34,7 +105,7 @@ const treeNurseryController = {
         ) VALUES ($1, $2, $3, $4, $5, CURRENT_DATE, $6, $7, $8, CURRENT_TIMESTAMP, $9)
         RETURNING *
       `;
-
+  
       const values = [
         tree_desc_id,
         growing_method_id,
@@ -44,25 +115,25 @@ const treeNurseryController = {
         propagation_method,
         village_id,
         registered_by,
-        notes
+        notes || null
       ];
-
-      console.log('Query values:', values); // Debug log
-
-      const result = await db.query(query, values);
-      console.log('Query result:', result.rows[0]); // Debug log
-      
-      res.status(201).json(result.rows[0]);
+  
+      const result = await db.query(insertQuery, values);
+  
+      return res.status(201).json({
+        message: 'Tree nursery registered successfully',
+        data: result.rows[0]
+      });
     } catch (error) {
-      console.error('Detailed error:', error); // More detailed error logging
-      res.status(500).json({ 
+      console.error('Registration error:', error);
+      return res.status(500).json({
         error: 'Failed to register tree nursery',
         details: error.message,
         code: error.code
       });
     }
   },
-
+    
   update: async (req, res) => {
     try {
       const { id } = req.params;
@@ -77,7 +148,7 @@ const treeNurseryController = {
         notes
       } = req.body;
 
-      console.log('Updating record:', id, req.body); // Debug log
+      console.log('Updating record:', id, req.body);
 
       const query = `
         UPDATE trees_nursery 

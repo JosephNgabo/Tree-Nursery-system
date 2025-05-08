@@ -20,7 +20,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/api/trees', treeRoutes);
 app.use('/api', userRoutes);
 app.use('/api/tree-nursery', treeNurseryRoutes);
-app.use('/api/tree-field', treeFieldRoutes);
+app.use('/api/trees-field', treeFieldRoutes);
 
 // Global error handler
 app.use((err, req, res, next) => {
