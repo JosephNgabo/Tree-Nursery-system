@@ -63,77 +63,77 @@ const treeNurseryController = {
   //   }
   // },
 
-  register: async (req, res) => {
-    try {
-      const {
-        tree_desc_id,         // ✅ Directly from client
-        growing_method_id,
-        stage_id_nursery,
-        date_planted,
-        quantity,
-        propagation_method,
-        village_id,
-        registered_by,
-        notes
-      } = req.body;
-  
-      // ✅ Step 1: Validate required fields
-      if (
-        !tree_desc_id || !growing_method_id || !stage_id_nursery || !date_planted ||
-        !quantity || !propagation_method || !village_id || !registered_by
-      ) {
-        return res.status(400).json({
-          error: 'Missing required fields',
-          details: 'Ensure all required fields including tree_desc_id are provided'
-        });
-      }
-  
-      // ✅ Step 2: Insert into trees_nursery
-      const insertQuery = `
-        INSERT INTO trees_nursery (
+    register: async (req, res) => {
+      try {
+        const {
+          tree_desc_id,         // ✅ Directly from client
+          growing_method_id,
+          stage_id_nursery,
+          date_planted,
+          quantity,
+          propagation_method,
+          village_id,
+          registered_by,
+          notes
+        } = req.body;
+    
+        // ✅ Step 1: Validate required fields
+        if (
+          !tree_desc_id || !growing_method_id || !stage_id_nursery || !date_planted ||
+          !quantity || !propagation_method || !village_id || !registered_by
+        ) {
+          return res.status(400).json({
+            error: 'Missing required fields',
+            details: 'Ensure all required fields including tree_desc_id are provided'
+          });
+        }
+    
+        // ✅ Step 2: Insert into trees_nursery
+        const insertQuery = `
+          INSERT INTO trees_nursery (
+            tree_desc_id,
+            growing_method_id,
+            stage_id_nursery,
+            date_planted,
+            quantity,
+            registration_date,
+            propagation_method,
+            village_id,
+            registered_by,
+            created_at,
+            notes
+          ) VALUES ($1, $2, $3, $4, $5, CURRENT_DATE, $6, $7, $8, CURRENT_TIMESTAMP, $9)
+          RETURNING *
+        `;
+    
+        const values = [
           tree_desc_id,
           growing_method_id,
           stage_id_nursery,
           date_planted,
           quantity,
-          registration_date,
           propagation_method,
           village_id,
           registered_by,
-          created_at,
-          notes
-        ) VALUES ($1, $2, $3, $4, $5, CURRENT_DATE, $6, $7, $8, CURRENT_TIMESTAMP, $9)
-        RETURNING *
-      `;
-  
-      const values = [
-        tree_desc_id,
-        growing_method_id,
-        stage_id_nursery,
-        date_planted,
-        quantity,
-        propagation_method,
-        village_id,
-        registered_by,
-        notes || null
-      ];
-  
-      const result = await db.query(insertQuery, values);
-  
-      return res.status(201).json({
-        message: 'Tree nursery registered successfully',
-        data: result.rows[0]
-      });
-    } catch (error) {
-      console.error('Registration error:', error);
-      return res.status(500).json({
-        error: 'Failed to register tree nursery',
-        details: error.message,
-        code: error.code
-      });
-    }
-  },
+          notes || null
+        ];
     
+        const result = await db.query(insertQuery, values);
+    
+        return res.status(201).json({
+          message: 'Tree nursery registered successfully',
+          data: result.rows[0]
+        });
+      } catch (error) {
+        console.error('Registration error:', error);
+        return res.status(500).json({
+          error: 'Failed to register tree nursery',
+          details: error.message,
+          code: error.code
+        });
+      }
+    },
+
   update: async (req, res) => {
     try {
       const { id } = req.params;

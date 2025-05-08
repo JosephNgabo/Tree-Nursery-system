@@ -5,7 +5,7 @@ const auth = require('../middleware/auth');
 
 /**
  * @swagger
- * /tree-field/register:
+ * /trees-field/register:
  *   post:
  *     summary: Register a new tree field entry
  *     tags: [TreeField]
