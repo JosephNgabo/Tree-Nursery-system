@@ -5,7 +5,7 @@ const auth = require('../middleware/auth'); // We'll create this next
 
 /**
  * @swagger
- * /tree-nursery:
+ * /tree-nursery/register:
  *   post:
  *     summary: Register a new tree nursery
  *     tags: [TreeNursery]
@@ -70,8 +70,6 @@ const auth = require('../middleware/auth'); // We'll create this next
  *                   type: object
  *       400:
  *         description: Missing required fields
- *       404:
- *         description: Tree description ID not found (if you validate it beforehand)
  *       500:
  *         description: Server error
  */
