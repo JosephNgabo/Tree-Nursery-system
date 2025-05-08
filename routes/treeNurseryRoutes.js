@@ -166,6 +166,51 @@ router.get('/', auth, treeNurseryController.view);
 // Get single tree nursery
 router.get('/:tree_desc_id', auth, treeNurseryController.viewSingle);
 
+/**
+ * @swagger
+ * /tree-nursery/{tree_desc_id}:
+ *   delete:
+ *     summary: Delete a tree nursery record
+ *     tags: [Tree Nursery]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: tree_desc_id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: The ID of the tree nursery to delete
+ *     responses:
+ *       200:
+ *         description: Tree nursery record deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Tree nursery deleted successfully
+ *       404:
+ *         description: Tree nursery record not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Tree nursery record not found
+ *       401:
+ *         description: Unauthorized – missing or invalid token
+ *       500:
+ *         description: Internal server error
+ */
+
+// Delete tree nursery
+router.delete('/:tree_desc_id', auth, treeNurseryController.delete);
+
 
 /**
  * @swagger
@@ -278,49 +323,5 @@ router.get('/:tree_desc_id', auth, treeNurseryController.viewSingle);
 // Update tree nursery
 router.put('/:tree_desc_id', auth, treeNurseryController.update);
 
-/**
- * @swagger
- * /tree-nursery/{tree_desc_id}:
- *   delete:
- *     summary: Delete a tree nursery record
- *     tags: [Tree Nursery]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: tree_desc_id
- *         required: true
- *         schema:
- *           type: integer
- *         description: The ID of the tree nursery to delete
- *     responses:
- *       200:
- *         description: Tree nursery record deleted successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: Tree nursery deleted successfully
- *       404:
- *         description: Tree nursery record not found
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   example: Tree nursery record not found
- *       401:
- *         description: Unauthorized – missing or invalid token
- *       500:
- *         description: Internal server error
- */
-
-// Delete tree nursery
-router.delete('/:tree_desc_id', auth, treeNurseryController.delete);
 
 module.exports = router; 
