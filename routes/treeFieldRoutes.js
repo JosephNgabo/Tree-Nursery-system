@@ -153,6 +153,6 @@ router.post('/register', auth, treeFieldController.register);
  *       500:
  *         description: Server error
  */
-router.post('/:tree_desc_id', auth, treeFieldController.update);
+router.put('/:tree_desc_id', auth, treeFieldController.update);
 
 module.exports = router;
