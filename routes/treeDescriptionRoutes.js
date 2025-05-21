@@ -6,7 +6,7 @@ const auth = require('../middleware/auth');
 // Get all tree descriptions
 /**
  * @swagger
- * /api/tree-descriptions:
+ * /tree-descriptions:
  *   get:
  *     summary: Get all tree descriptions
  *     tags: [TreeDescription]
@@ -28,7 +28,7 @@ router.get('/', auth, treeDescriptionController.getAll);
 // Get a single tree description by ID
 /**
  * @swagger
- * /api/tree-descriptions/{tree_desc_id}:
+ * /tree-descriptions/{tree_desc_id}:
  *   get:
  *     summary: Get a tree description by ID
  *     tags: [TreeDescription]
@@ -55,7 +55,7 @@ router.get('/:tree_desc_id', auth, treeDescriptionController.getOne);
 // Create a new tree description
 /**
  * @swagger
- * /api/tree-descriptions:
+ * /tree-descriptions:
  *   post:
  *     summary: Add a new tree description
  *     tags: [TreeDescription]
@@ -77,7 +77,7 @@ router.post('/', auth, treeDescriptionController.create);
 // Update a tree description
 /**
  * @swagger
- * /api/tree-descriptions/{tree_desc_id}:
+ * /tree-descriptions/{tree_desc_id}:
  *   put:
  *     summary: Update a tree description by ID
  *     tags: [TreeDescription]
@@ -108,7 +108,7 @@ router.put('/:tree_desc_id', auth, treeDescriptionController.update);
 // Delete a tree description
 /**
  * @swagger
- * /api/tree-descriptions/{tree_desc_id}:
+ * /tree-descriptions/{tree_desc_id}:
  *   delete:
  *     summary: Delete a tree description by ID
  *     tags: [TreeDescription]
