@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const growthStageFieldController = require('../controllers/growthStageFieldController');
+const auth = require('../middleware/auth');
 
 /**
  * @swagger
@@ -99,11 +100,11 @@ const growthStageFieldController = require('../controllers/growthStageFieldContr
  *         description: Stage not found
  */
 
-router.post('/', growthStageFieldController.create);
-router.get('/', growthStageFieldController.getAll);
-router.get('/:tag_id', growthStageFieldController.getById);
-router.put('/:tag_id', growthStageFieldController.update);
-router.delete('/:tag_id', growthStageFieldController.delete);
+router.post('/', auth, growthStageFieldController.create);
+router.get('/', auth, growthStageFieldController.getAll);
+router.get('/:tag_id', auth, growthStageFieldController.getById);
+router.put('/:tag_id', auth, growthStageFieldController.update);
+router.delete('/:tag_id', auth, growthStageFieldController.delete);
 
 
 
