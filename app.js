@@ -8,6 +8,7 @@ const treeNurseryRoutes = require('./routes/treeNurseryRoutes');
 const treeFieldRoutes = require('./routes/treeFieldRoutes');
 const treeGrowingMethodsRoutes = require('./routes/treeGrowingMethodsRoutes');
 const treeDescriptionRoutes = require('./routes/treeDescriptionRoutes');
+const growthStageRoutes = require('./routes/growthStageRoutes');
 
 const app = express();
 
@@ -25,7 +26,7 @@ app.use('/api/tree-nursery', treeNurseryRoutes);
 app.use('/api/trees-field', treeFieldRoutes);
 app.use('/api/tree-growing-methods', treeGrowingMethodsRoutes);
 app.use('/api/tree-description', treeDescriptionRoutes);
-
+app.use('/api/growth-stage', growthStageRoutes);
 // Global error handler
 app.use((err, req, res, next) => {
   console.error(err.stack);
