@@ -6,7 +6,7 @@ const auth = require('../middleware/auth');
 // Routes
 /**
  * @swagger
- * /api/growth-stages:
+ * /growth-stages:
  *   post:
  *     summary: Create a new growth stage
  *     tags: [GrowthStage]
@@ -38,7 +38,7 @@ const auth = require('../middleware/auth');
 router.post('/', auth, controller.create);
 /**
  * @swagger
- * /api/growth-stages:
+ * /growth-stages:
  *   get:
  *     summary: Get all growth stages
  *     tags: [GrowthStage]
@@ -56,7 +56,7 @@ router.post('/', auth, controller.create);
 router.get('/', auth, controller.getAll);
 /**
  * @swagger
- * /api/growth-stages/{id}:
+ * /growth-stages/{id}:
  *   get:
  *     summary: Get a single growth stage by ID
  *     tags: [GrowthStage]
@@ -81,7 +81,7 @@ router.get('/', auth, controller.getAll);
 router.get('/:tag_id', auth, controller.getById);
 /**
  * @swagger
- * /api/growth-stages/{id}:
+ * /growth-stages/{id}:
  *   put:
  *     summary: Update an existing growth stage
  *     tags: [GrowthStage]
@@ -119,7 +119,7 @@ router.get('/:tag_id', auth, controller.getById);
 router.put('/:tag_id', auth, controller.update);
 /**
  * @swagger
- * /api/growth-stages/{id}:
+ * /growth-stages/{id}:
  *   delete:
  *     summary: Delete a growth stage by ID
  *     tags: [GrowthStage]
