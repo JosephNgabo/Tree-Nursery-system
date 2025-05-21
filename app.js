@@ -6,6 +6,7 @@ const { swaggerUi, swaggerSpec } = require('./swaggerConfig');
 const userRoutes = require('./routes/userRoutes');
 const treeNurseryRoutes = require('./routes/treeNurseryRoutes');
 const treeFieldRoutes = require('./routes/treeFieldRoutes');
+const treeGrowingMethodsRoutes = require('./routes/treeGrowingMethodsRoutes');
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/api', userRoutes);
 app.use('/api/tree-nursery', treeNurseryRoutes);
 app.use('/api/trees-field', treeFieldRoutes);
+app.use('/api/tree-growing-methods', treeGrowingMethodsRoutes);
 
 // Global error handler
 app.use((err, req, res, next) => {
