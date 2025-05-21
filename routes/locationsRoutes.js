@@ -4,7 +4,7 @@ const locationsController = require('../controllers/locationsController');
 
 /**
  * @swagger
- * /api/locations:
+ * /locations:
  *   get:
  *     summary: Get all locations with pagination, filtering, and search
  *     tags: [Locations]
