@@ -48,29 +48,70 @@ const treeDescriptionController = {
     }
   },
 
-  // Update existing
+  // // Update existing
+  // update: async (req, res) => {
+  //   try {
+  //     const { tree_desc_id } = req.params;
+  //     const { scientific_name, Kinyarwanda, Family, Products } = req.body;
+
+  //     const result = await db.query(
+  //       `UPDATE tree_description 
+  //        SET scientific_name = $1, Kinyarwanda = $2, Family = $3, Products = $4 
+  //        WHERE tree_desc_id = $5 RETURNING *`,
+  //       [scientific_name, Kinyarwanda, Family, Products, tree_desc_id]
+  //     );
+
+  //     if (result.rows.length === 0) {
+  //       return res.status(404).json({ message: 'Tree description not found' });
+  //     }
+
+  //     res.status(200).json(result.rows[0]);
+  //   } catch (error) {
+  //     console.error('Error updating tree description:', error);
+  //     res.status(500).json({ error: 'Failed to update record' });
+  //   }
+  // },
+  // Update existing 
   update: async (req, res) => {
     try {
       const { tree_desc_id } = req.params;
-      const { scientific_name, Kinyarwanda, Family, Products } = req.body;
-
+      const fields = req.body;
+  
+      const allowedFields = ['scientific_name', 'kinyarwanda', 'family', 'products'];
+      const updates = [];
+      const values = [];
+  
+      let i = 1;
+      for (const key of allowedFields) {
+        if (fields[key] !== undefined) {
+          updates.push(`${key} = $${i}`);
+          values.push(fields[key]);
+          i++;
+        }
+      }
+  
+      if (updates.length === 0) {
+        return res.status(400).json({ error: 'No fields provided to update' });
+      }
+  
+      values.push(tree_desc_id); // last value for WHERE clause
+  
       const result = await db.query(
-        `UPDATE tree_description 
-         SET scientific_name = $1, Kinyarwanda = $2, Family = $3, Products = $4 
-         WHERE tree_desc_id = $5 RETURNING *`,
-        [scientific_name, Kinyarwanda, Family, Products, tree_desc_id]
+        `UPDATE tree_description SET ${updates.join(', ')} WHERE tree_desc_id = $${values.length} RETURNING *`,
+        values
       );
-
+  
       if (result.rows.length === 0) {
         return res.status(404).json({ message: 'Tree description not found' });
       }
-
+  
       res.status(200).json(result.rows[0]);
     } catch (error) {
       console.error('Error updating tree description:', error);
       res.status(500).json({ error: 'Failed to update record' });
     }
   },
+  
 
   // Delete
   delete: async (req, res) => {
