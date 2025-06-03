@@ -33,12 +33,13 @@ const treeDescriptionController = {
   // Create new
   create: async (req, res) => {
     try {
-      const { scientific_name, kinyarwanda, family, products } = req.body;
+      const { scientific_name, kinyarwanda, family, products, quantity_nursery = 0, quantity_field = 0 } = req.body;
 
       const result = await db.query(
-        `INSERT INTO tree_description (scientific_name, kinyarwanda, family, products)
-         VALUES ($1, $2, $3, $4) RETURNING *`,
-        [scientific_name, kinyarwanda, family, products]
+        `INSERT INTO tree_description (scientific_name, kinyarwanda, family, products, quantity_nursery, quantity_field)
+         VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
+        [scientific_name, kinyarwanda, family, products, quantity_nursery || 0, quantity_field || 0]
+
       );
 
       res.status(201).json(result.rows[0]);
@@ -75,9 +76,14 @@ const treeDescriptionController = {
   update: async (req, res) => {
     try {
       const { tree_desc_id } = req.params;
-      const fields = req.body;
+      const fields = {
+        ...req.body,
+        quantity_nursery: req.body.quantity_nursery || 0,
+        quantity_field: req.body.quantity_field || 0
+      };
   
-      const allowedFields = ['scientific_name', 'kinyarwanda', 'family', 'products'];
+      const allowedFields = ['scientific_name', 'kinyarwanda', 'family', 'products', 'quantity_nursery' , 'quantity_field'];
+      
       const updates = [];
       const values = [];
   
